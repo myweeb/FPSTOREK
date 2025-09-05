@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🍬 Doce Encanto - KYEezy</title>
+
+<!-- Fonte Poppins do Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =====================================================
+   VARIÁVEIS GLOBAIS
+   ===================================================== */
+:root {
+  --rosa: #ff6b81;
+  --rosa-claro: #ffe0e6;
+  --branco: #fff;
+  --cinza: #555;
+  --sombra: 0 4px 15px rgba(0,0,0,0.1);
+  --transicao: 0.3s ease;
+  --confete-cores: #ff4757, #ff6b81, #ffe0e6, #f5a623, #2ed573;
+}
+
+/* =====================================================
+   RESET E ESTILO BASE
+   ===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fffafa;
+  color: var(--cinza);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: var(--rosa);
+  padding: 12px 25px;
+  color: var(--branco);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: var(--sombra);
+}
+
+header h1 {
+  font-size: 1.8em;
+  font-weight: 700;
+  user-select: none;
+}
+
+/* =====================================================
+   HAMBURGUER RESPONSIVO
+   ===================================================== */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 40px;
+  height: 26px;
+  cursor: pointer;
+  z-index: 1010;
+}
+
+.hamburger span {
+  display: block;
+  height: 4px;
+  background-color: #fff;
+  border-radius: 3px;
+  transition: all var(--transicao);
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* =====================================================
+   SIDEBAR
+   ===================================================== */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 900;
+}
+
+.overlay.show {
+  display: block;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -270px;
+  width: 270px;
+  height: 100%;
+  background: var(--rosa);
+  color: #fff;
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: left var(--transicao);
+  z-index: 1001;
+  box-shadow: 4px 0 12px rgba(0,0,0,0.25);
+}
+
+.sidebar.show {
+  left: 0;
+}
+
+.sidebar a {
+  font-size: 1.2em;
+  color: #fff;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}
+
+/* =====================================================
+   MENU PRINCIPAL
+   ===================================================== */
+.menu {
+  max-width: 1000px;
+  margin: 25px auto;
+  display: grid;
+  gap: 20px;
+  padding: 0 15px;
+}
+
+/* ITEM DO MENU */
+.item {
+  background-color: var(--branco);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: var(--sombra);
+  transition: transform var(--transicao), box-shadow var(--transicao);
+}
+
+.item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.item h3 {
+  font-size: 1.4em;
+  color: var(--rosa);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* BOTÃO DE EXPANDIR VARIAÇÕES */
+.toggle {
+  background-color: var(--rosa);
+  border: none;
+  color: white;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.3em;
+  transition: all var(--transicao);
+}
+
+.toggle.active {
+  transform: rotate(45deg);
+  background-color: #ff4757;
+}
+
+/* =====================================================
+   VARIAÇÕES DE PRODUTOS
+   ===================================================== */
+.variacoes {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  opacity: 0;
+  margin-top: 0;
+}
+
+.variacoes.show {
+  max-height: 1200px;
+  opacity: 1;
+  margin-top: 15px;
+}
+
+.variacoes div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--rosa-claro);
+  padding: 12px 15px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  transition: background var(--transicao);
+}
+
+.variacoes div:hover {
+  background-color: #ffd6de;
+}
+
+.variacoes input {
+  width: 65px;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-size: 1em;
+}
+
+.variacoes button {
+  background-color: var(--rosa);
+  border: none;
+  padding: 8px 16px;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.variacoes button:hover {
+  background-color: #ff4757;
+}
+
+/* =====================================================
+   CARRINHO
+   ===================================================== */
+#carrinho {
+  max-width: 1000px;
+  margin: 35px auto;
+  background-color: var(--rosa-claro);
+  padding: 30px 25px;
+  border-radius: 20px;
+  box-shadow: var(--sombra);
+  transition: transform var(--transicao);
+}
+
+#carrinho h2 {
+  color: var(--rosa);
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+#itens p {
+  background-color: var(--branco);
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: var(--sombra);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remove-btn {
+  background: #ff4757;
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  padding: 3px 8px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: 0.3s;
+}
+
+.remove-btn:hover {
+  background-color: #e84118;
+}
+
+#carrinho button {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1em;
+  border: none;
+  cursor: pointer;
+  background-color: var(--rosa);
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+#carrinho button:hover {
+  background-color: #ff4757;
+}
+
+/* =====================================================
+   RESPONSIVIDADE
+   ===================================================== */
+@media (max-width: 768px) {
+  .menu {
+    padding: 0 15px;
+    gap: 15px;
+  }
+
+  .item h3 {
+    font-size: 1.3em;
+  }
+
+  .toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  #carrinho {
+    padding: 25px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.5em;
+  }
+
+  .hamburger {
+    width: 35px;
+    height: 24px;
+  }
+
+  .toggle {
+    width: 35px;
+    height: 35px;
+    font-size: 1.1em;
+  }
+
+  #carrinho {
+    padding: 20px 10px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- =====================================================
+   HEADER COM HAMBURGUER
+===================================================== -->
+<header>
+  <h1>Doce Encanto</h1>
+  <div class="hamburger" onclick="toggleSidebar(this)">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</header>
+
+<!-- =====================================================
+   OVERLAY E SIDEBAR
+===================================================== -->
+<div class="overlay" id="overlay" onclick="fecharSidebar()"></div>
+
+<nav id="sidebar" class="sidebar">
+  <a href="#">🏠 Início</a>
+  <a href="#cardapio">📋 Cardápio</a>
+  <a href="#carrinho">🛒 Carrinho</a>
+  <a href="https://wa.me/5599999999999" target="_blank">💬 WhatsApp</a>
+</nav>
+
+<!-- =====================================================
+   MENU DE PRODUTOS
+===================================================== -->
+<div class="menu" id="cardapio">
+
+  <!-- ITEM: Brigadeiros -->
+  <div class="item">
+    <h3>Brigadeiros 
+      <button class="toggle" onclick="toggleVariacoes(this)">+</button>
+    </h3>
+    <div class="variacoes">
+      <div>
+        <span>Ninho com Morango</span>
+        <input type="number" min="0" value="0">
+        <button onclick="add(this)">Adicionar</button>
+      </div>
+      <div>
+        <span>Ninho com Nutella</span>
+        <input type="number" min="0" value="0">
+        <button onclick="add(this)">Adicionar</button>
+      </div>
+      <div>
+        <span>Tradicional</span>
+        <input type="number" min="0" value="0">
+        <button onclick="add(this)">Adicionar</button>
+      </div>
+      <div>
+        <span>Confetes</span>
+        <input type="number" min="0" value="0">
+        <button onclick="add(this)">Adicionar</button>
+      </div>
+      <div>
+        <span>Beijinho</span>
+        <input type="number" min="0" value="0">
+        <button onclick="add(this)">Adicionar</button>
+      </div>
+      <div>
+        <span>Ferrero Rocher</span>
+        <input type="number" min="0" value="0">
+        <button onclick="add(this)">Adicionar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ITEM: Coxinha de Chocolate -->
+  <div class="item">
+    <h3>Coxinha de Chocolate 
+      <button class="toggle" onclick="toggleVariacoes(this)">+</button>
+    </h3>
+    <div class="variacoes">
+      <div>
+        <span>Morango e Uva com Ninho</span>
+        <input type="number" min="0" value="0">
+        <button onclick="add(this)">Adicionar</button>
+      </div>
+      <div>
+        <span>Recheio de ninho</span>
+        <input type="number" min="0" value="0">
+        <button onclick="add(this)">Adicionar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ITEM: Surpresa -->
+  <div class="item">
+    <h3>Surpresa 
+      <button class="toggle" onclick="toggleVariacoes(this)">+</button>
+    </h3>
+    <div class="variacoes">
+      <div>
+        <span>Uva e Morango</span>
+        <input type="number" min="0" value="0">
+        <button onclick="add(this)">Adicionar</button>
+      </div>
+      <div>
+        <span>Creme de Ninho</span>
+        <input type="number" min="0" value="0">
+        <button onclick="add(this)">Adicionar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ITEM: Outros Doces -->
+  <div class="item">
+    <h3>Outros Doces 
+      <button class="toggle" onclick="toggleVariacoes(this)">+</button>
+    </h3>
+    <div class="variacoes">
+      <div>
+        <span>Pudim</span>
+        <input type="number" min="0" value="0">
+        <button onclick="add(this)">Adicionar</button>
+      </div>
+      <div>
+        <span>Brownie</span>
+        <input type="number" min="0" value="0">
+        <button onclick="add(this)">Adicionar</button>
+      </div>
+      <div>
+        <span>Bolo no Pote</span>
+        <input type="number" min="0" value="0">
+        <button onclick="add(this)">Adicionar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================
+   CARRINHO
+===================================================== -->
+<div id="carrinho">
+  <h2>🛒 Carrinho</h2>
+  <div id="itens"></div>
+  <button onclick="finalizar()">Finalizar Pedido</button>
+</div>
+
+<script>
+/* =====================================================
+   VARIÁVEIS GLOBAIS
+===================================================== */
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+/* =====================================================
+   FUNÇÃO SIDEBAR
+===================================================== */
+function toggleSidebar(el) {
+  el.classList.toggle("active");
+  document.getElementById("sidebar").classList.toggle("show");
+  document.getElementById("overlay").classList.toggle("show");
+}
+
+function fecharSidebar() {
+  document.querySelector(".hamburger").classList.remove("active");
+  document.getElementById("sidebar").classList.remove("show");
+  document.getElementById("overlay").classList.remove("show");
+}
+
+/* =====================================================
+   TOGGLE VARIAÇÕES
+===================================================== */
+function toggleVariacoes(btn) {
+  btn.classList.toggle("active");
+  let variacoes = btn.parentElement.nextElementSibling;
+  variacoes.classList.toggle("show");
+}
+
+/* =====================================================
+   ADICIONAR AO CARRINHO
+===================================================== */
+function add(button) {
+  let div = button.parentElement;
+  let nome = div.querySelector("span").innerText;
+  let qtd = parseInt(div.querySelector("input").value);
+  if (qtd > 0) {
+    let existente = carrinho.find(item => item.nome === nome);
+    if (existente) {
+      existente.qtd += qtd;
+    } else {
+      carrinho.push({nome, qtd});
+    }
+    salvarCarrinho();
+    mostrarCarrinho();
+    div.querySelector("input").value = 0;
+    efeitoConfete(button);
+  }
+}
+
+/* =====================================================
+   REMOVER DO CARRINHO
+===================================================== */
+function remover(nome) {
+  carrinho = carrinho.filter(item => item.nome !== nome);
+  salvarCarrinho();
+  mostrarCarrinho();
+}
+
+/* =====================================================
+   MOSTRAR CARRINHO
+===================================================== */
+function mostrarCarrinho() {
+  let itensDiv = document.getElementById("itens");
+  itensDiv.innerHTML = "";
+  carrinho.forEach(item => {
+    let p = document.createElement("p");
+    p.innerHTML = `${item.qtd}x ${item.nome} <button class="remove-btn" onclick="remover('${item.nome}')">X</button>`;
+    itensDiv.appendChild(p);
+  });
+}
+
+/* =====================================================
+   SALVAR NO LOCALSTORAGE
+===================================================== */
+function salvarCarrinho() {
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+
+/* =====================================================
+   FINALIZAR PEDIDO
+===================================================== */
+function finalizar() {
+  if (carrinho.length === 0) {
+    alert("Carrinho vazio!");
+    return;
+  }
+  let msg = "Olá, gostaria de pedir:\n";
+  carrinho.forEach(item => {
+    msg += `${item.qtd}x ${item.nome}\n`;
+  });
+  let url = "https://wa.me/553193712197?text=" + encodeURIComponent(msg);
+  window.open(url, "_blank");
+}
+
+/* =====================================================
+   EFEITO CONFETE QUANDO ADICIONA PRODUTO
+===================================================== */
+function efeitoConfete(button) {
+  const confete = document.createElement("div");
+  confete.style.position = "absolute";
+  confete.style.width = "8px";
+  confete.style.height = "8px";
+  confete.style.backgroundColor = ["#ff4757","#ff6b81","#ffe0e6","#f5a623","#2ed573"][Math.floor(Math.random()*5)];
+  confete.style.left = button.getBoundingClientRect().left + "px";
+  confete.style.top = button.getBoundingClientRect().top + "px";
+  confete.style.borderRadius = "50%";
+  confete.style.zIndex = 2000;
+  document.body.appendChild(confete);
+
+  let anim = confete.animate([
+    { transform: 'translateY(0px) rotate(0deg)', opacity: 1 },
+    { transform: 'translateY(-50px) rotate(360deg)', opacity: 0 }
+  ], {
+    duration: 1000,
+    easing: 'ease-out'
+  });
+
+  anim.onfinish = () => confete.remove();
+}
+
+/* =====================================================
+   INICIAR CARRINHO AO CARREGAR
+===================================================== */
+document.addEventListener("DOMContentLoaded", mostrarCarrinho);
+</script>
+
+</body>
+</html>
