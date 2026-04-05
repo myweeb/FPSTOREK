@@ -1,632 +1,297 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🍬 Doce Encanto - KYEezy</title>
+  <meta charset="UTF-8">
+  <title>Barbearia Estilo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ===========================
+       VARIÁVEIS DE TEMA
+    ============================ */
+    :root {
+      --primary: #d4af37; /* dourado */
+      --dark: #111;
+      --light: #f5f5f5;
+      --gray: #333;
+      --transition: all 0.3s ease;
+    }
 
-<!-- Fonte Poppins do Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    /* ===========================
+       RESET
+    ============================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<style>
-/* =====================================================
-   VARIÁVEIS GLOBAIS
-   ===================================================== */
-:root {
-  --rosa: #ff6b81;
-  --rosa-claro: #ffe0e6;
-  --branco: #fff;
-  --cinza: #555;
-  --sombra: 0 4px 15px rgba(0,0,0,0.1);
-  --transicao: 0.3s ease;
-  --confete-cores: #ff4757, #ff6b81, #ffe0e6, #f5a623, #2ed573;
-}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--dark);
+      color: var(--light);
+      line-height: 1.6;
+    }
 
-/* =====================================================
-   RESET E ESTILO BASE
-   ===================================================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #fffafa;
-  color: var(--cinza);
-  line-height: 1.5;
-  overflow-x: hidden;
-}
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-/* =====================================================
-   HEADER
-   ===================================================== */
-header {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  background: var(--rosa);
-  padding: 12px 25px;
-  color: var(--branco);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
-  box-shadow: var(--sombra);
-}
+    /* ===========================
+       HEADER
+    ============================ */
+    header {
+      background: #000;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid var(--primary);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
 
-header h1 {
-  font-size: 1.8em;
-  font-weight: 700;
-  user-select: none;
-}
+    header h1 {
+      font-size: 32px;
+      font-weight: bold;
+      color: var(--primary);
+      letter-spacing: 2px;
+    }
 
-/* =====================================================
-   HAMBURGUER RESPONSIVO
-   ===================================================== */
-.hamburger {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 40px;
-  height: 26px;
-  cursor: pointer;
-  z-index: 1010;
-}
+    nav {
+      margin-top: 10px;
+    }
 
-.hamburger span {
-  display: block;
-  height: 4px;
-  background-color: #fff;
-  border-radius: 3px;
-  transition: all var(--transicao);
-}
+    nav a {
+      display: inline-block;
+      color: var(--light);
+      font-size: 16px;
+      padding: 8px 16px;
+      border: 1px solid var(--primary);
+      border-radius: 20px;
+      transition: var(--transition);
+    }
 
-.hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
+    nav a:hover {
+      background: var(--primary);
+      color: var(--dark);
+    }
 
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
+    /* ===========================
+       HERO
+    ============================ */
+    .hero {
+      margin-top: 100px; /* espaço por causa do header fixo */
+      position: relative;
+      height: 70vh;
+      overflow: hidden;
+    }
 
-.hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
-}
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-/* =====================================================
-   SIDEBAR
-   ===================================================== */
-.overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.4);
-  z-index: 900;
-}
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(0,0,0,0.7) 50%, rgba(212,175,55,0.3) 50%);
+      z-index: 1;
+    }
 
-.overlay.show {
-  display: block;
-}
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+    }
 
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: -270px;
-  width: 270px;
-  height: 100%;
-  background: var(--rosa);
-  color: #fff;
-  padding: 25px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  transition: left var(--transicao);
-  z-index: 1001;
-  box-shadow: 4px 0 12px rgba(0,0,0,0.25);
-}
+    .hero-text h2 {
+      font-size: 36px;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
 
-.sidebar.show {
-  left: 0;
-}
+    .hero-text p {
+      font-size: 18px;
+      color: var(--light);
+    }
 
-.sidebar a {
-  font-size: 1.2em;
-  color: #fff;
-  padding: 8px 0;
-  transition: color 0.2s;
-}
+    /* ===========================
+       SOBRE
+    ============================ */
+    .sobre {
+      padding: 60px 20px;
+      text-align: center;
+      background: var(--gray);
+    }
 
-.sidebar a:hover {
-  text-decoration: underline;
-}
+    .sobre h2 {
+      color: var(--primary);
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
 
-/* =====================================================
-   MENU PRINCIPAL
-   ===================================================== */
-.menu {
-  max-width: 1000px;
-  margin: 25px auto;
-  display: grid;
-  gap: 20px;
-  padding: 0 15px;
-}
+    .sobre p {
+      max-width: 600px;
+      margin: auto;
+    }
 
-/* ITEM DO MENU */
-.item {
-  background-color: var(--branco);
-  border-radius: 15px;
-  padding: 25px;
-  box-shadow: var(--sombra);
-  transition: transform var(--transicao), box-shadow var(--transicao);
-}
+    /* ===========================
+       SERVIÇOS
+    ============================ */
+    .servicos {
+      padding: 60px 20px;
+      background: var(--dark);
+      text-align: center;
+    }
 
-.item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
+    .servicos h2 {
+      color: var(--primary);
+      font-size: 28px;
+      margin-bottom: 40px;
+    }
 
-.item h3 {
-  font-size: 1.4em;
-  color: var(--rosa);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
 
-/* BOTÃO DE EXPANDIR VARIAÇÕES */
-.toggle {
-  background-color: var(--rosa);
-  border: none;
-  color: white;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 1.3em;
-  transition: all var(--transicao);
-}
+    .card {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      transition: var(--transition);
+      border: 1px solid var(--primary);
+    }
 
-.toggle.active {
-  transform: rotate(45deg);
-  background-color: #ff4757;
-}
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(212,175,55,0.3);
+    }
 
-/* =====================================================
-   VARIAÇÕES DE PRODUTOS
-   ===================================================== */
-.variacoes {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.3s ease;
-  opacity: 0;
-  margin-top: 0;
-}
+    .card i {
+      font-size: 40px;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
 
-.variacoes.show {
-  max-height: 1200px;
-  opacity: 1;
-  margin-top: 15px;
-}
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+      color: var(--light);
+    }
 
-.variacoes div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--rosa-claro);
-  padding: 12px 15px;
-  border-radius: 12px;
-  margin-bottom: 10px;
-  transition: background var(--transicao);
-}
+    .card p {
+      font-size: 14px;
+      color: #ccc;
+    }
 
-.variacoes div:hover {
-  background-color: #ffd6de;
-}
+    /* ===========================
+       FOOTER
+    ============================ */
+    footer {
+      background: #000;
+      padding: 30px;
+      text-align: center;
+      border-top: 2px solid var(--primary);
+    }
 
-.variacoes input {
-  width: 65px;
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  text-align: center;
-  font-size: 1em;
-}
+    footer a {
+      margin: 0 10px;
+      color: var(--light);
+      font-size: 26px;
+      transition: var(--transition);
+    }
 
-.variacoes button {
-  background-color: var(--rosa);
-  border: none;
-  padding: 8px 16px;
-  color: #fff;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
+    footer a:hover {
+      color: var(--primary);
+      transform: scale(1.2);
+    }
 
-.variacoes button:hover {
-  background-color: #ff4757;
-}
+    /* ===========================
+       RESPONSIVO
+    ============================ */
+    @media(max-width:768px){
+      header h1 {font-size: 24px;}
+      .hero {height: 50vh;}
+      .hero-text h2 {font-size: 24px;}
+      .hero-text p {font-size: 14px;}
+      .sobre h2 {font-size: 22px;}
+      .servicos h2 {font-size: 22px;}
+      .card h3 {font-size: 18px;}
+    }
 
-/* =====================================================
-   CARRINHO
-   ===================================================== */
-#carrinho {
-  max-width: 1000px;
-  margin: 35px auto;
-  background-color: var(--rosa-claro);
-  padding: 30px 25px;
-  border-radius: 20px;
-  box-shadow: var(--sombra);
-  transition: transform var(--transicao);
-}
-
-#carrinho h2 {
-  color: var(--rosa);
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-#itens p {
-  background-color: var(--branco);
-  padding: 10px 15px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  box-shadow: var(--sombra);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.remove-btn {
-  background: #ff4757;
-  border: none;
-  color: #fff;
-  border-radius: 8px;
-  padding: 3px 8px;
-  cursor: pointer;
-  font-size: 0.9em;
-  transition: 0.3s;
-}
-
-.remove-btn:hover {
-  background-color: #e84118;
-}
-
-#carrinho button {
-  width: 100%;
-  padding: 16px;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 1.1em;
-  border: none;
-  cursor: pointer;
-  background-color: var(--rosa);
-  color: #fff;
-  transition: background-color 0.3s;
-}
-
-#carrinho button:hover {
-  background-color: #ff4757;
-}
-
-/* =====================================================
-   RESPONSIVIDADE
-   ===================================================== */
-@media (max-width: 768px) {
-  .menu {
-    padding: 0 15px;
-    gap: 15px;
-  }
-
-  .item h3 {
-    font-size: 1.3em;
-  }
-
-  .toggle {
-    width: 40px;
-    height: 40px;
-  }
-
-  #carrinho {
-    padding: 25px 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  header h1 {
-    font-size: 1.5em;
-  }
-
-  .hamburger {
-    width: 35px;
-    height: 24px;
-  }
-
-  .toggle {
-    width: 35px;
-    height: 35px;
-    font-size: 1.1em;
-  }
-
-  #carrinho {
-    padding: 20px 10px;
-  }
-}
-</style>
+    @media(max-width:480px){
+      nav a {font-size: 14px; padding: 6px 12px;}
+      .hero-text h2 {font-size: 20px;}
+      .hero-text p {font-size: 12px;}
+      .sobre p {font-size: 14px;}
+      .card p {font-size: 12px;}
+    }
+  </style>
 </head>
 <body>
 
-<!-- =====================================================
-   HEADER COM HAMBURGUER
-===================================================== -->
-<header>
-  <h1>Doce Encanto</h1>
-  <div class="hamburger" onclick="toggleSidebar(this)">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</header>
+  <!-- HEADER -->
+  <header>
+    <h1>Barbearia Estilo</h1>
+    <nav>
+      <a href="tel:+553899999999">Agendar Corte</a>
+    </nav>
+  </header>
 
-<!-- =====================================================
-   OVERLAY E SIDEBAR
-===================================================== -->
-<div class="overlay" id="overlay" onclick="fecharSidebar()"></div>
-
-<nav id="sidebar" class="sidebar">
-  <a href="#">🏠 Início</a>
-  <a href="#cardapio">📋 Cardápio</a>
-  <a href="#carrinho">🛒 Carrinho</a>
-  <a href="https://wa.me/5599999999999" target="_blank">💬 WhatsApp</a>
-</nav>
-
-<!-- =====================================================
-   MENU DE PRODUTOS
-===================================================== -->
-<div class="menu" id="cardapio">
-
-  <!-- ITEM: Brigadeiros -->
-  <div class="item">
-    <h3>Brigadeiros 
-      <button class="toggle" onclick="toggleVariacoes(this)">+</button>
-    </h3>
-    <div class="variacoes">
-      <div>
-        <span>Ninho com Morango</span>
-        <input type="number" min="0" value="0">
-        <button onclick="add(this)">Adicionar</button>
-      </div>
-      <div>
-        <span>Ninho com Nutella</span>
-        <input type="number" min="0" value="0">
-        <button onclick="add(this)">Adicionar</button>
-      </div>
-      <div>
-        <span>Tradicional</span>
-        <input type="number" min="0" value="0">
-        <button onclick="add(this)">Adicionar</button>
-      </div>
-      <div>
-        <span>Confetes</span>
-        <input type="number" min="0" value="0">
-        <button onclick="add(this)">Adicionar</button>
-      </div>
-      <div>
-        <span>Beijinho</span>
-        <input type="number" min="0" value="0">
-        <button onclick="add(this)">Adicionar</button>
-      </div>
-      <div>
-        <span>Ferrero Rocher</span>
-        <input type="number" min="0" value="0">
-        <button onclick="add(this)">Adicionar</button>
-      </div>
+  <!-- HERO -->
+  <div class="hero">
+    <img src="barbearia.jpg" alt="Imagem da Barbearia">
+    <div class="hero-text">
+      <h2>Estilo que fala por você</h2>
+      <p>Cortes clássicos e modernos, barba impecável e ambiente único.</p>
     </div>
   </div>
 
-  <!-- ITEM: Coxinha de Chocolate -->
-  <div class="item">
-    <h3>Coxinha de Chocolate 
-      <button class="toggle" onclick="toggleVariacoes(this)">+</button>
-    </h3>
-    <div class="variacoes">
-      <div>
-        <span>Morango e Uva com Ninho</span>
-        <input type="number" min="0" value="0">
-        <button onclick="add(this)">Adicionar</button>
-      </div>
-      <div>
-        <span>Recheio de ninho</span>
-        <input type="number" min="0" value="0">
-        <button onclick="add(this)">Adicionar</button>
-      </div>
-    </div>
-  </div>
+  <!-- SOBRE -->
+  <section class="sobre">
+    <h2>Sobre Nós</h2>
+    <p>Na Barbearia Estilo, tradição e modernidade se encontram. Oferecemos cortes clássicos e modernos, barba bem feita e um ambiente acolhedor para você relaxar. Nossa missão é proporcionar uma experiência única, onde cada detalhe importa.</p>
+  </section>
 
-  <!-- ITEM: Surpresa -->
-  <div class="item">
-    <h3>Surpresa 
-      <button class="toggle" onclick="toggleVariacoes(this)">+</button>
-    </h3>
-    <div class="variacoes">
-      <div>
-        <span>Uva e Morango</span>
-        <input type="number" min="0" value="0">
-        <button onclick="add(this)">Adicionar</button>
+  <!-- SERVIÇOS -->
+  <section class="servicos">
+    <h2>Nossos Serviços</h2>
+    <div class="cards">
+      <div class="card">
+        <i class="fas fa-cut"></i>
+        <h3>Corte Masculino</h3>
+        <p>Do clássico ao moderno, nossos barbeiros garantem estilo e precisão.</p>
       </div>
-      <div>
-        <span>Creme de Ninho</span>
-        <input type="number" min="0" value="0">
-        <button onclick="add(this)">Adicionar</button>
+      <div class="card">
+        <i class="fas fa-beard"></i>
+        <h3>Barba</h3>
+        <p>Barba desenhada, aparada ou completa, sempre com acabamento impecável.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-spa"></i>
+        <h3>Tratamentos</h3>
+        <p>Cuidados especiais para cabelo e barba, com produtos de alta qualidade.</p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- ITEM: Outros Doces -->
-  <div class="item">
-    <h3>Outros Doces 
-      <button class="toggle" onclick="toggleVariacoes(this)">+</button>
-    </h3>
-    <div class="variacoes">
-      <div>
-        <span>Pudim</span>
-        <input type="number" min="0" value="0">
-        <button onclick="add(this)">Adicionar</button>
-      </div>
-      <div>
-        <span>Brownie</span>
-        <input type="number" min="0" value="0">
-        <button onclick="add(this)">Adicionar</button>
-      </div>
-      <div>
-        <span>Bolo no Pote</span>
-        <input type="number" min="0" value="0">
-        <button onclick="add(this)">Adicionar</button>
-      </div>
-    </div>
-  </div>
-</div>
+  <!-- FOOTER -->
+  <footer>
+    <a href="https://wa.me/553899999999"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.tiktok.com/@barbeariaestilo"><i class="fab fa-tiktok"></i></a>
+    <Aqui está um exemplo completo de **site para barbearia**, com **HTML + CSS bem elaborado** e mais de **300 linhas** para você personalizar. O design é totalmente responsivo, pensado para celular, com um visual masculino e sofisticado (preto, dourado, cinza), animações suaves e seções bem estruturadas.
 
-<!-- =====================================================
-   CARRINHO
-===================================================== -->
-<div id="carrinho">
-  <h2>🛒 Carrinho</h2>
-  <div id="itens"></div>
-  <button onclick="finalizar()">Finalizar Pedido</button>
-</div>
-
-<script>
-/* =====================================================
-   VARIÁVEIS GLOBAIS
-===================================================== */
-let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
-/* =====================================================
-   FUNÇÃO SIDEBAR
-===================================================== */
-function toggleSidebar(el) {
-  el.classList.toggle("active");
-  document.getElementById("sidebar").classList.toggle("show");
-  document.getElementById("overlay").classList.toggle("show");
-}
-
-function fecharSidebar() {
-  document.querySelector(".hamburger").classList.remove("active");
-  document.getElementById("sidebar").classList.remove("show");
-  document.getElementById("overlay").classList.remove("show");
-}
-
-/* =====================================================
-   TOGGLE VARIAÇÕES
-===================================================== */
-function toggleVariacoes(btn) {
-  btn.classList.toggle("active");
-  let variacoes = btn.parentElement.nextElementSibling;
-  variacoes.classList.toggle("show");
-}
-
-/* =====================================================
-   ADICIONAR AO CARRINHO
-===================================================== */
-function add(button) {
-  let div = button.parentElement;
-  let nome = div.querySelector("span").innerText;
-  let qtd = parseInt(div.querySelector("input").value);
-  if (qtd > 0) {
-    let existente = carrinho.find(item => item.nome === nome);
-    if (existente) {
-      existente.qtd += qtd;
-    } else {
-      carrinho.push({nome, qtd});
-    }
-    salvarCarrinho();
-    mostrarCarrinho();
-    div.querySelector("input").value = 0;
-    efeitoConfete(button);
-  }
-}
-
-/* =====================================================
-   REMOVER DO CARRINHO
-===================================================== */
-function remover(nome) {
-  carrinho = carrinho.filter(item => item.nome !== nome);
-  salvarCarrinho();
-  mostrarCarrinho();
-}
-
-/* =====================================================
-   MOSTRAR CARRINHO
-===================================================== */
-function mostrarCarrinho() {
-  let itensDiv = document.getElementById("itens");
-  itensDiv.innerHTML = "";
-  carrinho.forEach(item => {
-    let p = document.createElement("p");
-    p.innerHTML = `${item.qtd}x ${item.nome} <button class="remove-btn" onclick="remover('${item.nome}')">X</button>`;
-    itensDiv.appendChild(p);
-  });
-}
-
-/* =====================================================
-   SALVAR NO LOCALSTORAGE
-===================================================== */
-function salvarCarrinho() {
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
-}
-
-/* =====================================================
-   FINALIZAR PEDIDO
-===================================================== */
-function finalizar() {
-  if (carrinho.length === 0) {
-    alert("Carrinho vazio!");
-    return;
-  }
-  let msg = "Olá, gostaria de pedir:\n";
-  carrinho.forEach(item => {
-    msg += `${item.qtd}x ${item.nome}\n`;
-  });
-  let url = "https://wa.me/553193712197?text=" + encodeURIComponent(msg);
-  window.open(url, "_blank");
-}
-
-/* =====================================================
-   EFEITO CONFETE QUANDO ADICIONA PRODUTO
-===================================================== */
-function efeitoConfete(button) {
-  const confete = document.createElement("div");
-  confete.style.position = "absolute";
-  confete.style.width = "8px";
-  confete.style.height = "8px";
-  confete.style.backgroundColor = ["#ff4757","#ff6b81","#ffe0e6","#f5a623","#2ed573"][Math.floor(Math.random()*5)];
-  confete.style.left = button.getBoundingClientRect().left + "px";
-  confete.style.top = button.getBoundingClientRect().top + "px";
-  confete.style.borderRadius = "50%";
-  confete.style.zIndex = 2000;
-  document.body.appendChild(confete);
-
-  let anim = confete.animate([
-    { transform: 'translateY(0px) rotate(0deg)', opacity: 1 },
-    { transform: 'translateY(-50px) rotate(360deg)', opacity: 0 }
-  ], {
-    duration: 1000,
-    easing: 'ease-out'
-  });
-
-  anim.onfinish = () => confete.remove();
-}
-
-/* =====================================================
-   INICIAR CARRINHO AO CARREGAR
-===================================================== */
-document.addEventListener("DOMContentLoaded", mostrarCarrinho);
-</script>
-
-</body>
-</html>
