@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Barbearia Estilo</title>
+<title>T Style</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 :root{
-  --primary:#d4af37;
-  --dark:#111;
-  --gray:#222;
+  --primary:#39ffb6;
+  --dark:#0a0a0a;
+  --gray:#151515;
   --light:#f5f5f5;
 }
 
@@ -28,31 +29,35 @@ header{
   top:0;
   width:100%;
   background:#000;
-  padding:8px;
+  padding:15px;
+  border-bottom:2px solid var(--primary);
   text-align:center;
-  border-bottom:1px solid var(--primary);
 }
 
 header h1{
-  font-size:16px;
+  font-size:20px;
   color:var(--primary);
+  letter-spacing:3px;
 }
 
-nav a{
-  display:inline-block;
-  margin-top:5px;
-  font-size:12px;
-  padding:6px 12px;
-  border-radius:20px;
+/* BOTÃO GRANDE */
+.buy-btn{
+  display:block;
+  width:90%;
+  margin:10px auto 0;
+  padding:14px;
   background:var(--primary);
   color:#000;
   font-weight:bold;
+  border-radius:30px;
+  font-size:16px;
+  text-decoration:none;
 }
 
 /* HERO */
 .hero{
-  margin-top:60px;
-  height:30vh;
+  margin-top:110px;
+  height:40vh;
   position:relative;
 }
 
@@ -60,14 +65,7 @@ nav a{
   width:100%;
   height:100%;
   object-fit:cover;
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.6);
+  filter:brightness(0.5);
 }
 
 .hero-text{
@@ -79,92 +77,83 @@ nav a{
 }
 
 .hero-text h2{
-  font-size:18px;
+  font-size:26px;
   color:var(--primary);
 }
 
 .hero-text p{
-  font-size:12px;
+  font-size:15px;
 }
 
 /* SEÇÕES */
 section{
-  padding:20px 10px;
+  padding:30px 15px;
   text-align:center;
 }
 
 h2{
-  font-size:18px;
+  font-size:22px;
   color:var(--primary);
-  margin-bottom:10px;
+  margin-bottom:15px;
 }
 
 p{
-  font-size:13px;
+  font-size:15px;
+  color:#ccc;
 }
 
-/* SERVIÇOS */
-.cards{
+/* CATEGORIAS */
+.grid{
   display:grid;
-  gap:10px;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
 .card{
   background:var(--gray);
-  padding:12px;
-  border-radius:8px;
-  border:1px solid var(--primary);
+  border-radius:10px;
+  overflow:hidden;
+  border:1px solid #222;
 }
 
-.card i{
-  font-size:22px;
-  color:var(--primary);
+.card img{
+  width:100%;
+  height:140px;
+  object-fit:cover;
 }
 
 .card h3{
-  font-size:14px;
-  margin:5px 0;
-}
-
-.card p{
-  font-size:12px;
-}
-
-/* GALERIA */
-.galeria-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:5px;
-}
-
-.galeria-grid img{
-  border-radius:5px;
+  padding:12px;
+  font-size:16px;
 }
 
 /* FOOTER */
 footer{
-  padding:15px;
   background:#000;
+  padding:20px;
   text-align:center;
+  border-top:2px solid var(--primary);
 }
 
-footer a{
-  margin:0 10px;
-  font-size:20px;
+footer i{
+  font-size:28px;
+  margin:0 15px;
+  transition:0.3s;
+}
+
+footer i:hover{
+  color:var(--primary);
+  transform:scale(1.2);
 }
 
 /* DESKTOP */
 @media(min-width:768px){
-  .cards{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .galeria-grid{
+  .grid{
     grid-template-columns:repeat(4,1fr);
   }
 
   .hero{
-    height:50vh;
+    height:60vh;
   }
 }
 </style>
@@ -173,62 +162,59 @@ footer a{
 <body>
 
 <header>
-  <h1>Barbearia Estilo</h1>
-  <nav>
-    <a href="tel:+553899999999">Agendar</a>
-  </nav>
+  <h1>T STYLE</h1>
+
+  <a class="buy-btn" href="https://wa.me/553899999999?text=ola%2C%20aguardo%20o%20atendimento" target="_blank">
+    Comprar agora
+  </a>
 </header>
 
 <div class="hero">
-  <img src="barbearia.jpg">
+  <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b">
   <div class="hero-text">
-    <h2>Seu estilo começa aqui</h2>
-    <p>Corte + barba profissional</p>
+    <h2>Vista sua atitude</h2>
+    <p>Moda urbana moderna</p>
   </div>
 </div>
 
 <section>
   <h2>Sobre</h2>
-  <p>Tradição + modernidade em cortes e barba.</p>
+  <p>Marca focada em estilo urbano, com peças modernas e identidade única.</p>
 </section>
 
 <section>
-  <h2>Serviços</h2>
-  <div class="cards">
+  <h2>Categorias</h2>
+
+  <div class="grid">
+
     <div class="card">
-      <i class="fas fa-cut"></i>
-      <h3>Corte</h3>
-      <p>Clássico ou moderno</p>
+      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab">
+      <h3>Camisetas</h3>
     </div>
 
     <div class="card">
-      <i class="fas fa-beard"></i>
-      <h3>Barba</h3>
-      <p>Acabamento perfeito</p>
+      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f">
+      <h3>Moletons</h3>
     </div>
 
     <div class="card">
-      <i class="fas fa-spa"></i>
-      <h3>Tratamento</h3>
-      <p>Cuidados premium</p>
+      <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38">
+      <h3>Acessórios</h3>
     </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1542060748-10c28b62716f">
+      <h3>Calças</h3>
+    </div>
+
   </div>
-</section>
 
-<section>
-  <h2>Galeria</h2>
-  <div class="galeria-grid">
-    <img src="corte1.jpg">
-    <img src="corte2.jpg">
-    <img src="corte3.jpg">
-    <img src="corte4.jpg">
-  </div>
 </section>
 
 <footer>
-  <a href="#"><i class="fab fa-whatsapp"></i></a>
-  <a href="#"><i class="fab fa-instagram"></i></a>
-  <a href="#"><i class="fab fa-tiktok"></i></a>
+  <a href="https://wa.me/553899999999" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+  <a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
 </footer>
 
 </body>
