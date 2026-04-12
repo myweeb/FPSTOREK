@@ -3,233 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>T Style</title>
+<title>Sua Loja</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-:root{
-  --primary:#06ac00;
-  --dark:#0a0a0a;
-  --gray:#141414;
+body{margin:0;font-family:Arial;background:#120052;color:#fff}
+
+nav{position:absolute;top:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:15px 30px;z-index:10}
+.nav-links a{color:#fff;margin-left:15px;text-decoration:none;font-size:18px;opacity:.8}
+.nav-links a:hover{opacity:1}
+
+header{position:relative;height:300px;background:url('https://images.unsplash.com/photo-1521335629791-ce4aec67dd47') center/cover}
+header::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.6)}
+
+.header-content{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.header-content h1{font-size:40px;margin:0;position:relative;z-index:2}
+.header-content p{opacity:.8}
+
+header::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9));
 }
 
-*{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-  font-family:sans-serif;
-  background:var(--dark);
-  color:#fff;
+.logo-bg{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:0.12;
+filter: blur(2px) brightness(1.2);
+z-index:1;
 }
 
-/* HEADER */
-header{
-  position:fixed;
-  top:0;
-  width:100%;
-  background:#000;
-  padding:10px 12px;
-  border-bottom:1px solid var(--primary);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+.logo{font-weight:bold;font-size:20px}
 
-header h1{
-  font-size:16px;
-  color:var(--primary);
-  letter-spacing:2px;
-}
+section{padding:40px}
 
-/* REDES */
-nav i{
-  font-size:18px;
-  margin-left:10px;
-  transition:0.2s;
-}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.product{background:#1a1a1a;padding:15px;border-radius:10px}
+.product img{width:100%;border-radius:10px}
+.product h3{margin:10px 0}
 
-nav i:hover{
-  color:var(--primary);
-  transform:scale(1.2);
-}
+select,button{width:100%;padding:10px;margin-top:10px;border:none;border-radius:5px}
+button{background:#25D366;color:#fff;font-weight:bold;cursor:pointer}
 
-/* BOTÃO */
-.buy-btn{
-  position:fixed;
-  bottom:15px;
-  left:50%;
-  transform:translateX(-50%);
-  background:var(--primary);
-  color:#000;
-  padding:14px 25px;
-  border-radius:30px;
-  font-weight:bold;
-  font-size:16px;
-  text-decoration:none;
-  box-shadow:0 0 15px var(--primary);
-  animation:pulse 1.5s infinite;
-}
-
-/* ANIMAÇÃO */
-@keyframes pulse{
-  0%{box-shadow:0 0 5px var(--primary);}
-  50%{box-shadow:0 0 20px var(--primary);}
-  100%{box-shadow:0 0 5px var(--primary);}
-}
-
-/* HERO */
-.hero{
-  margin-top:55px;
-  height:28vh;
-  position:relative;
-}
-
-.hero img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  filter:brightness(0.4);
-}
-
-.hero-text{
-  position:absolute;
-  bottom:10px;
-  left:10px;
-}
-
-.hero-text h2{
-  font-size:18px;
-  color:var(--primary);
-}
-
-.hero-text p{
-  font-size:12px;
-}
-
-/* SEÇÕES */
-section{
-  padding:15px 10px;
-}
-
-h2{
-  font-size:16px;
-  color:var(--primary);
-  margin-bottom:8px;
-}
-
-p{
-  font-size:12px;
-  color:#aaa;
-}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-
-.card{
-  background:var(--gray);
-  border-radius:8px;
-  overflow:hidden;
-  border:1px solid #222;
-  transition:0.2s;
-}
-
-.card:hover{
-  border-color:var(--primary);
-}
-
-.card img{
-  width:100%;
-  height:100px;
-  object-fit:cover;
-}
-
-.card h3{
-  font-size:13px;
-  padding:8px;
-}
-
-/* DESKTOP */
-@media(min-width:768px){
-  .grid{
-    grid-template-columns:repeat(4,1fr);
-  }
-}
+.about{max-width:700px;margin:auto;text-align:center}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>T STYLE(teste)</h1>
-
- <nav>
-  <a href="https://maps.google.com/?q=Montes+Claros+MG" target="_blank" class="map-link">
-    <i class="fas fa-location-dot"></i>
-  </a>
-
-  <a href="https://wa.me/553899999999" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-
-  <a href="https://instagram.com" target="_blank">
-    <i class="fab fa-instagram"></i>
-  </a>
-
-  <a href="https://tiktok.com" target="_blank">
-    <i class="fab fa-tiktok"></i>
-  </a>
+<nav>
+<div class="logo">FP</div>
+<div class="nav-links">
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="#"><i class="fab fa-tiktok"></i></a>
+<a href="#"><i class="fab fa-whatsapp"></i></a>
+</div>
 </nav>
+
+<!-- LOGO ATRÁS DO TÍTULO -->
+<img src="ChatGPT Image 12 de abr. de 2026, 09_31_00.png" class="logo-bg">
+
+<div class="header-content">
+<h1>FP STORE</h1>
+<p>Estilo e qualidade em um só lugar</p>
+</div>
 </header>
 
-<div class="hero">
-  <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b">
-  <div class="hero-text">
-    <h2>teste</h2>
-    <p>teste</p>
-  </div>
+<section class="about">
+<h2>Sobre Nós</h2>
+<p>Somos uma loja focada em roupas exclusivas e de qualidade. Trabalhamos com peças selecionadas para destacar seu estilo.</p>
+</section>
+
+<section>
+<h2 style="text-align:center">Produtos</h2>
+<div class="products">
+
+<div class="product">
+<img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab">
+<h3>Camiseta Street</h3>
+
+<select class="size">
+<option value="P">P</option>
+<option value="M">M</option>
+<option value="G">G</option>
+</select>
+
+<select class="variant">
+<option value="Preta">Preta</option>
+<option value="Branca">Branca</option>
+</select>
+
+<button onclick="comprar('Camiseta Street', this)">Comprar</button>
 </div>
 
-<section>
-  <h2>teste</h2>
-  <p>teste</p>
+<div class="product">
+<img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f">
+<h3>Moletom Premium</h3>
+
+<select class="size">
+<option value="P">P</option>
+<option value="M">M</option>
+<option value="G">G</option>
+</select>
+
+<select class="variant">
+<option value="Cinza">Cinza</option>
+<option value="Preto">Preto</option>
+</select>
+
+<button onclick="comprar('Moletom Premium', this)">Comprar</button>
+</div>
+
+</div>
 </section>
 
-<section>
-  <h2>Categorias</h2>
+<script>
+function comprar(nome, btn){
+let product = btn.parentElement;
+let size = product.querySelector('.size').value;
+let variant = product.querySelector('.variant').value;
 
-  <div class="grid">
+let mensagem = `Olá! Quero comprar:\nProduto: ${nome}\nTamanho: ${size}\nCor: ${variant}`;
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab">
-      <h3>Camisetas</h3>
-    </div>
+let numero = '5599999999999';
+let url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f">
-      <h3>Moletons</h3>
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38">
-      <h3>Acessórios</h3>
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1542060748-10c28b62716f">
-      <h3>Calças</h3>
-    </div>
-
-  </div>
-
-</section>
-
-<a class="buy-btn" href="https://wa.me/553899999999?text=ola%2C%20aguardo%20o%20atendimento" target="_blank">
-  Chamar!
-</a>
+window.open(url, '_blank');
+}
+</script>
 
 </body>
 </html>
